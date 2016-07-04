@@ -5,12 +5,13 @@ class MainClass
     static void Main()
     {
         string temp;
-        int height;
+        double height;
 
         System.Console.Write("身長[cm]を入力してください>>>");
         temp = System.Console.ReadLine();
-        price = System.Int32.Parse(temp);
+        height = System.Double.Parse(temp);
 
-        System.Console.WriteLine("税込み価格{0:c}", price * 1.05);
+        System.Console.WriteLine("あなたの標準体重は{0:##.0}Kgです", height * height * 22 / 100 / 100);
     }
 }
+

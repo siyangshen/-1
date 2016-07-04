@@ -11,6 +11,6 @@ class MainClass
         temp = System.Console.ReadLine();
         price = System.Int32.Parse(temp);
 
-        System.Console.WriteLine("税込み価格{0:c}", price * 1.05);
+        System.Console.WriteLine("税込み価格={0:c}", price * 1.05);
     }
 }
