@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "演習１", "ConsoleApplication2\演習１.csproj", "{FE93F28B-C35D-48F7-B8C6-22F9387604C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "演習２", "演習２\演習２.csproj", "{7925E9D7-131F-496F-B047-11D727792566}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE93F28B-C35D-48F7-B8C6-22F9387604C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE93F28B-C35D-48F7-B8C6-22F9387604C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE93F28B-C35D-48F7-B8C6-22F9387604C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE93F28B-C35D-48F7-B8C6-22F9387604C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7925E9D7-131F-496F-B047-11D727792566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7925E9D7-131F-496F-B047-11D727792566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7925E9D7-131F-496F-B047-11D727792566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7925E9D7-131F-496F-B047-11D727792566}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
