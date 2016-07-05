@@ -9,9 +9,9 @@ class Computer
     {
         computerName += str;
     }
-    public string GetName()
+    public string GetcomputerName()
     {
-        return string;
+        return computerName;
     }
     public void PrintSpec()
     {
@@ -29,7 +29,7 @@ class MainClass
         computer1.SetName("Sales01");
         computer1.memory = 1000;
         computer1.disk = 160;
-        Console.WriteLine("{0}", computer1.GetName());
+        Console.WriteLine("{0}", computer1.GetcomputerName());
         computer1.PrintSpec();
     }
 }
