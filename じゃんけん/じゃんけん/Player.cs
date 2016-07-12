@@ -4,11 +4,19 @@ namespace Janken
 {
     class Player
     {
+        private int i;
+        private string name;
+
+        public Player(string name)
+        {
+            this.name = name;
+        }
+
         public int start()
         {
             int result;
             string fist;
-            Console.WriteLine("じゃんけんが始まります。\n数字を入力してください。\n1.チョキ  2.グー　3.パー");                       
+            Console.WriteLine("じゃんけんが始まります。\n数字を入力してください。\n1.チョキ  2.グー　3.パー");            
             while (true)
             {
                 fist = Console.ReadLine();
@@ -18,10 +26,11 @@ namespace Janken
                     continue;
                 }
                 break;
-            }          
-
+            }
             result = Int32.Parse(fist);
-            Console.WriteLine("あなたは{0}を出しました。", fist);
+            Console.WriteLine("{0}は{1}を出しました。", name, fist);
+            
+            
             return result;
         }
         private string IntToFist(int input)
