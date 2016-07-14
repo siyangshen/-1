@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
-namespace 複数人数じゃんけん
+namespace 複数人じゃんけん
 {
     class Utils
     {
@@ -52,14 +52,15 @@ namespace 複数人数じゃんけん
             {
             }
         }
-        class Program
+    
+    class Program
         {
             private static string fist;
-            private static int result;
             static void Main(string[] args)
             {
                 string x;
                 string y;
+
                 Console.WriteLine("じゃんけんが始まります。\n対戦パソコン数を入力してください:");
                 x = Console.ReadLine();
                 int x1 = Int32.Parse(x);
@@ -67,51 +68,62 @@ namespace 複数人数じゃんけん
                 y = Console.ReadLine();
                 int y1 = Int32.Parse(y);
                 List<Player> playerlist = new List<Player>();
-                for (int i = 1; i <= y1; i++)
-                {
-                    playerlist.Add(new user(/*"ユーザ" + i*/));
-                    Console.WriteLine("数字を入力してください。\n1.チョキ  2.グー　3.パー");
-                    while (true)
-                    {
-                        fist = Console.ReadLine();
-                        if (fist != "1" && fist != "2" && fist != "3")
-                        {
-                            Console.WriteLine("1から3の数字を入力してください。\n1.チョキ  2.グー　3.パー");
-                            continue;
-                        }
-                        break;
-                    }
-                    result = Int32.Parse(fist);
-                    Console.WriteLine("ユーザー{0}は{1}を出しました。", i, IntToFist(result));
-                }
-                for (int i = 1; i <= x1; i++)
-                {
-                    playerlist.Add(new cpu());
-                    Random ran = new Random();
-                    int result = ran.Next(1, 4);
-                    Console.WriteLine("パソコン{0}は{1}を出しました。", i, IntToFist(result));
 
-
-                }
-                foreach (Player player in playerlist)
-                {
-                    int fist = player.fist;
-                }
-
-                
-                bool condition1;
-                bool condition2;
-                bool condition3;
                 do
                 {
-                    // TODO じゃんけんの手を入力する処理を実装する
+                    for (int i = 1; i <= y1; i++)
+                    {
+                        playerlist.Add(new user(/*"ユーザ" + i*/));
+                        Console.WriteLine("数字を入力してください。\n1.チョキ  2.グー　3.パー");
+                        
+                        while (true)
+                        {
+                            fist = Console.ReadLine();
+                            if (fist != "1" && fist != "2" && fist != "3")
+                            {
+                                Console.WriteLine("1から3の数字を入力してください。\n1.チョキ  2.グー　3.パー");
+                                continue;
+                            }
+                            break;
+                        }
+                        int userResult = Int32.Parse(fist);
+                        user userPlayer = new user();
+                        playerlist.Add(userPlayer);
+                        userPlayer.fist = userResult;
+
+
+                        Console.WriteLine("ユーザー{0}は{1}を出しました。", i, IntToFist(userResult));
+                    }
+                    for (int i = 1; i <= x1; i++)
+                    {
+
+                        cpu cpuPlayer = new cpu();
+                        playerlist.Add(cpuPlayer);
+                        Random ran = new Random();
+                        int cpuResult = ran.Next(1, 4);
+                        cpuPlayer.fist = cpuResult;
+
+
+                        Console.WriteLine("パソコン{0}は{1}を出しました。", i, IntToFist(cpuResult));
+
+
+                    }
+                    foreach (Player player in playerlist)
+                    {
+                        int fist = player.fist;
+                    }
+
+
+                    bool condition1;
+                    bool condition2;
+                    bool condition3;
 
                     condition1 = false;
                     condition2 = false;
                     condition3 = false;
                     foreach (Player player in playerlist)
                     {
-                        if (result == Utils.CHOKI)
+                        if (player.fist == Utils.CHOKI)
                         {
                             condition1 = true;
                             break;
@@ -121,7 +133,7 @@ namespace 複数人数じゃんけん
 
                     foreach (Player player in playerlist)
                     {
-                        if (result == Utils.GU)
+                        if (player.fist == Utils.GU)
                         {
                             condition2 = true;
                             break;
@@ -129,24 +141,19 @@ namespace 複数人数じゃんけん
                     }
                     foreach (Player player in playerlist)
                     {
-                        if (result == Utils.PA)
+                        if (player.fist == Utils.PA)
                         {
                             condition3 = true;
                             break;
                         }
                     }
-                    while (false) ;
 
-                    while (
-                    (condition1 && condition2 && condition3) ||
-                    (condition1 && !condition2 && !condition3) ||
-                    (!condition1 && condition2 && !condition3) ||
-                    (!condition1 && !condition2 && condition3))
-                        Console.WriteLine("あいこです。もう一度やります。");
-                    
-
-
-
+                    //while (
+                    //(condition1 && condition2 && condition3) ||
+                    //(condition1 && !condition2 && !condition3) ||
+                    //(!condition1 && condition2 && !condition3) ||
+                    //(!condition1 && !condition2 && condition3))
+                    //    break;
 
 
                     bool guWon = (condition1 && condition2 && !condition3);
@@ -158,7 +165,7 @@ namespace 複数人数じゃんけん
                                 var player = playerlist[i - 1];
                                 if (player.fist == Utils.GU)
                                 {
-                                    Console.WriteLine("{0}の勝ち", "プレイヤー" + i);
+                                    Console.WriteLine("{0}の勝ち", "ユーザー" + i);
                                 }
                             }
                         }
@@ -184,7 +191,7 @@ namespace 複数人数じゃんけん
                                 var player = playerlist[i - 1];
                                 if (player.fist == Utils.CHOKI)
                                 {
-                                    Console.WriteLine("{0}の勝ち", "プレイヤー" + i);
+                                    Console.WriteLine("{0}の勝ち", "ユーザー" + i);
                                 }
                             }
                         }
@@ -202,6 +209,7 @@ namespace 複数人数じゃんけん
                         continue;
                     }
                     bool paWon = (!condition1 && condition2 && condition3);
+                
                     if (paWon)
                     {
                         for (int i = 1; i <= y1; i++)
@@ -210,7 +218,7 @@ namespace 複数人数じゃんけん
                                 var player = playerlist[i - 1];
                                 if (player.fist == Utils.PA)
                                 {
-                                    Console.WriteLine("{0}の勝ち", "プレイヤー" + i);
+                                    Console.WriteLine("{0}の勝ち", "ユーザー" + i);
                                 }
                             }
                         }
@@ -227,40 +235,51 @@ namespace 複数人数じゃんけん
 
                         continue;
                     }
-                    int a = 1;
+
+                    if (!chokiWon && !guWon && !paWon)
+                    {
+                        Console.WriteLine("あいこです。もう一度やります。");
+                        playerlist.Clear();
+            
+           
+            
+                        continue;
+                    }
+
+                    int a=0; 
                     if (chokiWon || guWon || paWon)
                     {
                         Console.WriteLine("もう一度やりますか？\n0.終了　1.やる");
                         fist = (Console.ReadLine());
+                        a = Convert.ToInt32(fist);
                     }
+                    
                     if (a == 0)
                     {
                         Console.WriteLine("終了します。");
-                        while (false) ;
+                        break;
                     }
 
                     if (a == 1)
                     {
-                        while (true) ;
+                        //while (true)
+                        //{
+
+                        //}
+                        continue;
                     }
-                } while (false);
+                } while (true);
 
 
+            }
 
-
-
-
-
-                    
-                }
-
-            }   
         }
-
-
     }
 
-  
+
+}
+
+
 
 
 
