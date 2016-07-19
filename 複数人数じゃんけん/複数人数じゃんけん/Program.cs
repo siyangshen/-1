@@ -2,6 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using CsvHelper;
     using Janken;
 
     public class Program
@@ -19,6 +22,13 @@
             Console.WriteLine("対戦人数を入力してください:");
             y = Console.ReadLine();
             int y1 = int.Parse(y);
+            var csv = new CsvWriter(new StreamWriter("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\out.csv", false, System.Text.Encoding.GetEncoding(932)));
+            dumpCsv("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\test1.csv");
+            dumpCsv("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\test2.csv");
+            dumpCsv("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\test3.csv");
+            dumpCsv("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\test4.csv");
+            Console.Read();
+
 
             do
             {
@@ -102,6 +112,8 @@
                     }
                 }
 
+                int win = 0;
+                int lose = 0;
                 if (condition1 == true && condition2 == true && condition3 == false)
                 {
                     for (int i = 1; i <= y1; i++)
@@ -111,7 +123,18 @@
                             if (player.Fist == Utils.GU)
                             {
                                 Console.WriteLine("{0}の勝ち", "ユーザー" + i);
+                                win = 1;
+                                lose = 0;
                             }
+                            else
+                            {
+                                win = 0;
+                                lose = 1;
+                            }
+
+                            csv.WriteField(win);
+                            csv.WriteField(lose);
+                            csv.NextRecord();
                         }
                     }
 
@@ -136,7 +159,18 @@
                             if (player.Fist == Utils.CHOKI)
                             {
                                 Console.WriteLine("{0}の勝ち", "ユーザー" + i);
+                                win = 1;
+                                lose = 0;
                             }
+                            else
+                            {
+                                win = 0;
+                                lose = 1;
+                            }
+
+                            csv.WriteField(win);
+                            csv.WriteField(lose);
+                            csv.NextRecord();
                         }
                     }
 
@@ -161,7 +195,18 @@
                             if (player.Fist == Utils.PA)
                             {
                                 Console.WriteLine("{0}の勝ち", "ユーザー" + i);
+                                win = 1;
+                                lose = 0;
                             }
+                            else
+                            {
+                                win = 0;
+                                lose = 1;
+                            }
+
+                            csv.WriteField(win);
+                            csv.WriteField(lose);
+                            csv.NextRecord();
                         }
                     }
 
@@ -201,6 +246,7 @@
                 if (a == 0)
                 {
                     Console.WriteLine("終了します。");
+
                     break;
                 }
 
@@ -210,6 +256,28 @@
                 }
             }
             while (true);
+            csv.Dispose();
         }
+        static void dumpCsv(string file)
+        {
+            Console.WriteLine(file + "================================");
+            var parser = new CsvReader(new StreamReader(file,
+                                                        System.Text.Encoding.GetEncoding(932)));
+            parser.Configuration.Encoding = System.Text.Encoding.GetEncoding(932);
+            parser.Configuration.AllowComments = true;
+            parser.Configuration.Comment = '#';
+            parser.Configuration.HasHeaderRecord = false;
+
+            while (parser.Read())
+            {
+                for (var i = 0; i < parser.CurrentRecord.Length; ++i)
+                {
+                    Console.WriteLine("{0}:{1}", i, parser.CurrentRecord.ElementAt(i));
+                }
+                Console.WriteLine("----------------------------");
+            }
+            parser.Dispose();
+        }
+
     }
 }
