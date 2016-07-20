@@ -10,28 +10,33 @@
     public class Program
     {
         private static string fist;
-
         private static void Main(string[] args)
         {
-            string x;
-            string y;
+            string numberOfCpu;
+            string numberOfUser;
+
 
             Console.WriteLine("じゃんけんが始まります。\n対戦パソコン数を入力してください:");
-            x = Console.ReadLine();
-            int x1 = int.Parse(x);
+            numberOfCpu = Console.ReadLine();
+            int x1 = int.Parse(numberOfCpu);
             Console.WriteLine("対戦人数を入力してください:");
-            y = Console.ReadLine();
-            int y1 = int.Parse(y);
-            var csv = new CsvWriter(new StreamWriter("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\out.csv", false, System.Text.Encoding.GetEncoding(932)));
-            dumpCsv("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\test1.csv");
-            dumpCsv("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\test2.csv");
-            dumpCsv("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\test3.csv");
-            dumpCsv("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\test4.csv");
-            Console.Read();
+            numberOfUser = Console.ReadLine();
+            int y1 = int.Parse(numberOfUser);
 
+            
+            var resultList = new List<List<int>>();
+            
+           
+            var wonCountDictionary = new Dictionary<string, int>();
+            
+
+            
+
+            var csv = new CsvWriter(new StreamWriter("C:\\Users\\00640-1\\Source\\Repos\\-1\\csv\\out.csv", false, System.Text.Encoding.GetEncoding(932)));
 
             do
             {
+                var detailList = new List<int>();
                 List<Player> playerlist = new List<Player>();
                 for (int i = 1; i <= y1; i++)
                 {
@@ -65,12 +70,14 @@
                     cpuPlayer.Fist = cpuResult;
                 }
 
+                //TODO convert to method
                 for (int i = 1; i <= y1; i++)
                 {
                     var player = playerlist[i - 1];
                     Console.WriteLine("ユーザー{0}は{1}を出しました。", i, player.IntToFist(player.Fist));
                 }
 
+                //TODO convert to method
                 for (int i = 1 + y1; i <= x1 + y1; i++)
                 {
                     var player = playerlist[i - 1];
@@ -85,6 +92,7 @@
                 condition2 = false;
                 condition3 = false;
 
+                //TODO convert to method
                 foreach (Player player in playerlist)
                 {
                     if (player.Fist == Utils.CHOKI)
@@ -93,7 +101,7 @@
                         break;
                     }
                 }
-
+                //TODO convert to method
                 foreach (Player player in playerlist)
                 {
                     if (player.Fist == Utils.GU)
@@ -102,7 +110,7 @@
                         break;
                     }
                 }
-
+                //TODO convert to method
                 foreach (Player player in playerlist)
                 {
                     if (player.Fist == Utils.PA)
@@ -114,113 +122,22 @@
 
                 int win = 0;
                 int lose = 0;
+
                 if (condition1 == true && condition2 == true && condition3 == false)
                 {
-                    for (int i = 1; i <= y1; i++)
-                    {
-                        {
-                            var player = playerlist[i - 1];
-                            if (player.Fist == Utils.GU)
-                            {
-                                Console.WriteLine("{0}の勝ち", "ユーザー" + i);
-                                win = 1;
-                                lose = 0;
-                            }
-                            else
-                            {
-                                win = 0;
-                                lose = 1;
-                            }
-
-                            csv.WriteField(win);
-                            csv.WriteField(lose);
-                            csv.NextRecord();
-                        }
-                    }
-
-                    for (int i = 1 + y1; i <= x1 + y1; i++)
-                    {
-                        {
-                            var player = playerlist[i - 1];
-                            if (player.Fist == Utils.GU)
-                            {
-                                Console.WriteLine("{0}の勝ち", "パソコン" + (i - y1));
-                            }
-                        }
-                    }
+                    WinProcess(x1, y1, csv, playerlist, ref win, ref lose, Utils.GU, detailList);
                 }
 
                 if (condition1 == true && condition2 == false && condition3 == true)
                 {
-                    for (int i = 1; i <= y1; i++)
-                    {
-                        {
-                            var player = playerlist[i - 1];
-                            if (player.Fist == Utils.CHOKI)
-                            {
-                                Console.WriteLine("{0}の勝ち", "ユーザー" + i);
-                                win = 1;
-                                lose = 0;
-                            }
-                            else
-                            {
-                                win = 0;
-                                lose = 1;
-                            }
-
-                            csv.WriteField(win);
-                            csv.WriteField(lose);
-                            csv.NextRecord();
-                        }
-                    }
-
-                    for (int i = 1 + y1; i <= x1 + y1; i++)
-                    {
-                        {
-                            var player = playerlist[i - 1];
-                            if (player.Fist == Utils.CHOKI)
-                            {
-                                Console.WriteLine("{0}の勝ち", "パソコン" + (i - y1));
-                            }
-                        }
-                    }
+                    WinProcess(x1, y1, csv, playerlist, ref win, ref lose, Utils.CHOKI, detailList);
                 }
 
                 if (condition1 == false && condition2 == true && condition3 == true)
                 {
-                    for (int i = 1; i <= y1; i++)
-                    {
-                        {
-                            var player = playerlist[i - 1];
-                            if (player.Fist == Utils.PA)
-                            {
-                                Console.WriteLine("{0}の勝ち", "ユーザー" + i);
-                                win = 1;
-                                lose = 0;
-                            }
-                            else
-                            {
-                                win = 0;
-                                lose = 1;
-                            }
-
-                            csv.WriteField(win);
-                            csv.WriteField(lose);
-                            csv.NextRecord();
-                        }
-                    }
-
-                    for (int i = 1 + y1; i <= x1 + y1; i++)
-                    {
-                        {
-                            var player = playerlist[i - 1];
-                            if (player.Fist == Utils.PA)
-                            {
-                                Console.WriteLine("{0}の勝ち", "パソコン" + (i - y1));
-                            }
-                        }
-                    }
+                    WinProcess(x1, y1, csv, playerlist, ref win, ref lose, Utils.PA, detailList);
                 }
+
 
                 if (
                     (!condition1 == true && condition2 == true && condition3 == false) ||
@@ -233,6 +150,30 @@
                     continue;
                 }
 
+                resultList.Add(detailList);
+
+                // 対戦回数
+                var taisenkaisu = 0;
+                wonCountDictionary.Clear();
+                foreach (var result in resultList)
+                {
+                    for (int i = 0; i < result.Count(); i++)
+                    {
+                        var userName = "user" + (i + 1);
+                        var nowResult = result[i];
+                        int pastCount = 0;
+                        if (wonCountDictionary.ContainsKey(userName))
+                        {
+                            pastCount = wonCountDictionary[userName];
+                            wonCountDictionary.Remove(userName);
+                        }
+                        Console.WriteLine(userName + ":" + pastCount + ":" + nowResult);
+                        wonCountDictionary.Add(userName, pastCount + nowResult);
+                    }
+                    taisenkaisu++;
+                }
+                Console.WriteLine("----");
+
                 int a = 0;
                 if ((condition1 == true && condition2 == true && condition3 == false) ||
                     (condition1 == true && condition2 == false && condition3 == true) ||
@@ -243,40 +184,69 @@
                     a = Convert.ToInt32(fist);
                 }
 
+                
+
                 if (a == 0)
                 {
                     Console.WriteLine("終了します。");
 
+                    Console.WriteLine("対戦回数{0}", taisenkaisu);
+                    for (int i = 0; i < resultList[0].Count(); i++)
+                    {
+                        var userName = "user" + (i + 1);
+                        var userWonCount = wonCountDictionary[userName];
+                        Console.WriteLine("ユーザー{0}は{1}回勝った  勝率は{2}%", i + 1, userWonCount, (double)userWonCount / taisenkaisu * 100);
+                        //csv.WriteField()
+                    }
+                    Console.ReadKey();
                     break;
                 }
 
-                if (a == 1)
-                {
-                    continue;
-                }
             }
             while (true);
             csv.Dispose();
-        }
-        static void dumpCsv(string file)
-        {
-            Console.WriteLine(file + "================================");
-            var parser = new CsvReader(new StreamReader(file,
-                                                        System.Text.Encoding.GetEncoding(932)));
-            parser.Configuration.Encoding = System.Text.Encoding.GetEncoding(932);
-            parser.Configuration.AllowComments = true;
-            parser.Configuration.Comment = '#';
-            parser.Configuration.HasHeaderRecord = false;
 
-            while (parser.Read())
+        }
+
+        
+
+        private static void WinProcess(int x1, int y1, CsvWriter csv, List<Player> playerlist, ref int win, ref int lose, int wonType,List<int> detailList)
+        {
+            for (int i = 1; i <= y1; i++)
             {
-                for (var i = 0; i < parser.CurrentRecord.Length; ++i)
                 {
-                    Console.WriteLine("{0}:{1}", i, parser.CurrentRecord.ElementAt(i));
+                    var player = playerlist[i - 1];
+                    if (player.Fist == wonType)
+                    {
+                        Console.WriteLine("{0}の勝ち", "ユーザー" + i);
+                        win = 1;
+                        lose = 0;
+                        detailList.Add(1);
+                    }
+                    else
+                    {
+                        win = 0;
+                        lose = 1;
+                        detailList.Add(0);
+                    }
+
+                    csv.WriteField(win);
+                    csv.WriteField(lose);
+                    csv.NextRecord();
                 }
-                Console.WriteLine("----------------------------");
             }
-            parser.Dispose();
+
+            for (int i = 1 + y1; i <= x1 + y1; i++)
+            {
+                {
+                    var player = playerlist[i - 1];
+                    if (player.Fist == wonType)
+                    {
+                        Console.WriteLine("{0}の勝ち", "パソコン" + (i - y1));
+                    }
+                }
+            }
+
         }
 
     }
