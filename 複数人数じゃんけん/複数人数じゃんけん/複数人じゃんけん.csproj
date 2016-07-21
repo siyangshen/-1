@@ -23,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>複数人じゃんけん.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\複数人数じゃんけん.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,6 +62,9 @@
     <None Include="packages.config" />
     <None Include="stylecop.json" />
     <None Include="stylecop1.json" />
+    <None Include="stylecop2.json" />
+    <None Include="stylecop3.json" />
+    <None Include="stylecop4.json" />
     <None Include="複数人じゃんけん.ruleset" />
   </ItemGroup>
   <ItemGroup>
