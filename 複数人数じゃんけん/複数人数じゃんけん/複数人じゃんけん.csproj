@@ -50,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Judge.cs" />
     <Compile Include="Cpu.cs" />
+    <Compile Include="Csv.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +67,8 @@
     <None Include="stylecop2.json" />
     <None Include="stylecop3.json" />
     <None Include="stylecop4.json" />
+    <None Include="stylecop5.json" />
+    <None Include="stylecop6.json" />
     <None Include="複数人じゃんけん.ruleset" />
   </ItemGroup>
   <ItemGroup>
