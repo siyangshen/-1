@@ -18,14 +18,26 @@
             string numberOfUser;
             string fist;
 
-            Console.WriteLine("じゃんけんが始まります。\n対戦パソコン数を入力してください:");
-            numberOfCpu = Console.ReadLine();
+            JankenAdapter adapter = new JankenAdapter();
+            adapter.AdaptedJanken(args);
+            Console.WriteLine("対戦パソコン数を入力してください:");
+            while (true)
+            {
+                numberOfCpu = Console.ReadLine();
+
+                if (!System.Text.RegularExpressions.Regex.IsMatch(numberOfCpu, @"^\d$"))
+                {
+                    Console.WriteLine("整数の数字を入力してください。");
+                    continue;
+                }
+
+                break;
+            }
+
             int numberOfCpu1 = int.Parse(numberOfCpu);
             Console.WriteLine("対戦人数を入力してください:");
             numberOfUser = Console.ReadLine();
             int numberOfUser1 = int.Parse(numberOfUser);
-
-            while (true)
             {
                 List<Player> playerlist = new List<Player>();
                 for (int i = 1; i <= numberOfUser1; i++)
@@ -45,7 +57,12 @@
                     }
 
                     int userResult = int.Parse(fist);
-                    User userPlayer = new User();
+
+                    // User userPlayer = new User();
+                    PlayerFactory userPlayerFactory = new UserPlayerFactory();
+
+                    Player userPlayer = userPlayerFactory.CreatePlayer();
+
                     playerlist.Add(userPlayer);
                     userPlayer.Fist = userResult;
                 }
@@ -53,7 +70,9 @@
                 Random ran = new Random();
                 for (int i = 1; i <= numberOfCpu1; i++)
                 {
-                    Cpu cpuPlayer = new Cpu();
+                    // Cpu cpuPlayer = new Cpu();
+                    PlayerFactory cpuPlayerFactory = new CpuPlayerFactory();
+                    Player cpuPlayer = cpuPlayerFactory.CreatePlayer();
                     playerlist.Add(cpuPlayer);
 
                     int cpuResult = ran.Next(1, 4);
@@ -73,7 +92,7 @@
                 {
                     Console.WriteLine("終了します。");
                     Csv.CsvOpen();
-                    break;
+                    //break;
                 }
             }
         }

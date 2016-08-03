@@ -28,6 +28,7 @@
             bool condition1;
             bool condition2;
             bool condition3;
+            
 
             condition1 = ExistFist(playerlist, Utils.CHOKI);
 
