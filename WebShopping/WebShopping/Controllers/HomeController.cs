@@ -23,7 +23,7 @@ namespace WebShopping.Controllers
             new Models.Product {PId=5,PName="東芝",Description="紙パック式掃除機 ブルー",PNum=10,Price=7980,PtId=2,Image="~/Image2/2.jpg" },
             new Models.Product {PId=6,PName="日立",Description="紙パック式掃除機 ホワイト",PNum=10,Price=9800,PtId=2,Image="~/Image2/3.jpg" },
             new Models.Product {PId=7,PName="パナソニック",Description="単機能レンジ22L ホワイト",PNum=10,Price=11379,PtId=3,Image="~/Image3/1.jpg" },
-            new Models.Product {PId=8,PName="シャープ",Description="エレックオーブンレンジ26L ホワイト",PNum=10,Price=8980,PtId=3,Image="~/Image3/2.jpg"},
+            new Models.Product {PId=8,PName="シャープ",Description="スチームオーブンレンジ23L ブラック",PNum=10,Price=20800,PtId=3,Image="~/Image3/2.jpg"},
             new Models.Product {PId=9,PName="日立",Description="過熱水蒸気オーブンレンジ22L パールホワイト",PNum=10,Price=21980,PtId=3,Image="~/Image3/3.jpg" }
         };
         List<Models.ProductImage> image = new List<Models.ProductImage>()
