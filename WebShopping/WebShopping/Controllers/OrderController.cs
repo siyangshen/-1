@@ -15,7 +15,7 @@ namespace WebShopping.Controllers
             new Models.Product {PId=2,PName="シャープ",Description="32V型 AQUOS 液晶テレビ",PNum=10,Price=37630,PtId=1,Image="~/Image/2.jpg"  },
             new Models.Product {PId=3,PName="LG",Description="43V型 4K液晶テレビ",PNum=10,Price=75800,PtId=1,Image="~/Image/3.jpg"  }
         };
-        List<Models.Product>
+        //List<Models.Product>
         public ActionResult Index()
         {
             return View();

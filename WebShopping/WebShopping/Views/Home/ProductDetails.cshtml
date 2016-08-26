@@ -5,5 +5,52 @@
     List<WebShopping.Models.ProductImage> images = ViewBag.images;
 }
 
-<h2>ProductDetails</h2>
+<h2>商品詳細</h2>
+<div>
+    <div style="width:200px;margin-left:20px;background-color:antiquewhite;height:230px;float:left">
+        <img id="imgs"style="width:190px;height:220px;margin:5px;"src=@Url.Content(p.Image)/>
+    </div>
+    <div style="width:200px;background-color:AppWorkspace;height:230px;margin-left:20px;float:left">
+        <br /><br/>
+        商品名:@p.PName<br /><br/>
+        商品説明:@p.Description<br/><br/>
+        商品単価:@p.Price<br/><br/>
+        在庫数量:@p.PNum<br/><br/>
+    </div>
+    <div style="height:50px;margin:20px;clear:left;">
+        @foreach(var item in images)
+        {
+            <img style="width:49px;margin:5px;height:49px;"src="@Url.Content(item.ImgUrl)"onmousemove="Check(this)"/>
+        }
+    </div>
+    <div style="text-align:right;width:420px;">
+        @if(!Request.IsAuthenticated)
+        {
+            @Html.ActionLink("カートに入れる", "AddToCart", "Cart", new { pid=p.PId,resulturl=Request.Url.ToString()},null)
+        }
+        else
+        {
+            @Ajax.ActionLink("カートに入れる", "AddToCart", "Cart", new { pid=p.PId,resulturl=Request.Url.ToString()},new AjaxOptions { OnSuccess = "ShowResult" })
+        }
+        &nbsp;&nbsp;
+        @Html.ActionLink("今すぐ買う","Complete","Order")
+    </div>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval");
+    <script type="text/javascript">
+        function Check(img)
+        {
+            $("#imgs").attr("src", $(img).attr("src"));
+        }
+        function ShowResult(data)
+        {
+            if(data=="OK")
+            {
+                alert("カートに入れました。")
+            }
+        }
+    </script>
+}
 
