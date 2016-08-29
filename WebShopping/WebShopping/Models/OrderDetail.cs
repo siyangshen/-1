@@ -9,14 +9,14 @@ namespace WebShopping.Models
     public class OrderDetail
     {
         [Key]
-        public int OrId { get; set; }
+        public int Odid { get; set; }
         [Required]
         [Range(0,100000)]
         public double Price { get; set; }
         public int Amout { get; set; }
-        public int ProId { get; set; }
+        public int Pid { get; set; }
         public Product Product { get; set; }
-        public int OId { get; set; }
+        public int Oid { get; set; }
         public Order Order { get; set; }
 
 

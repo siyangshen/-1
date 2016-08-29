@@ -18,7 +18,7 @@ namespace WebShopping.Controllers
         {
             return View();
         }
-        
+        [HttpPost]
         public ActionResult Register(Models.Member member)
         {
             return View();

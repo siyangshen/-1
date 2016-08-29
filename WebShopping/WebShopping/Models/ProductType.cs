@@ -16,5 +16,7 @@ namespace WebShopping.Models
         [DisplayName("すべてのカテゴリー")]
         [Required(ErrorMessage ="商品のカテゴリーを入力してください。")]
         public string PtName { get; set; }
+        //ひとつのカテゴリーに複数の商品を含む可能
+        public List<Product> Products { get; set; }
     }
 }

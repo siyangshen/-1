@@ -10,7 +10,7 @@ namespace WebShopping.Models
     public class Product
     {
         [Key]
-        public int PId { get; set; }
+        public int Pid { get; set; }
         [Required(ErrorMessage ="商品名を入力してください"),MaxLength(50,ErrorMessage ="50文字以下")]
         public string PName { get; set; }
         [Required(ErrorMessage ="商品の詳細を入力してください")]
@@ -24,9 +24,9 @@ namespace WebShopping.Models
        
         public ProductType ProductType { get; set; }
         //ひとつの商品は複数の写真を含む可能
-        public List<ProductImage> ProductImg { get; set; }
+        public List<ProductImg> ProductImg { get; set; }
         //ひとつの商品は複数のカートに存在可能
-        public List<Cart> Carts { get; set; }
+        public List<Cart> Cars { get; set; }
         //ひとつの商品は同時に注文される可能
         public List<OrderDetail> OrdDetail { get; set; }
         

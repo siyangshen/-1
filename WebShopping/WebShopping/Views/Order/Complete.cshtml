@@ -1,7 +1,35 @@
 ﻿
 @{
     ViewBag.Title = "Complete";
+    List<WebShopping.Models.Product> ps = Model;
+    List<int> counts = ViewBag.counts;
+    int i = 0;
 }
-
-<h2>Complete</h2>
+<h2>注文詳細</h2>
+<table id="products"style="border-color:">
+    @foreach(var item in ps)
+    {
+        <tr style="border-color:a;border:2px solid">
+            <td>
+                <img style="width:60px;height:50px;"src="@Url.Content(item.Image)"/>
+            </td>
+            <td>
+                @item.PName
+            </td>
+            <td>
+                @Html.Label(item.Pid.ToString(), item.Price.ToString(), new { id="lable1"})
+            </td>
+            <td>
+                <input width="20"id="count"type="text"value=@counts[i]/>
+            </td>
+        </tr>
+        i++;
+    }
+    <tr id="s">
+        <td id="ss">
+            <label id="allprice"style="text-align:right;padding-right:10px">0</label>
+            <label id="allcount"style="text-align:right;padding-right:10px">0</label>
+        </td>
+    </tr>
+</table>
 
