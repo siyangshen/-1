@@ -7,7 +7,7 @@
 
 <h2>ショッピング</h2>
 <div>
-    <div style="width:250px;float:left;background-color:antiquewhite">
+    <div style="width:200px;float:left;background-color:antiquewhite">
         カテゴリー:<br/>
         <ul>
             @foreach(var item in type)
@@ -17,14 +17,14 @@
         </ul>
     </div> 
     <div style="width:800px;float:left;background-color:aliceblue">
-        商品リスト:<br/>
+        <br/>
         <table>
             @foreach(var item in products)
             {
                 <tr style="float:left">
                     <td style="text-align:center">
                         <a href="/Home/ProductDetails?Pid=@item.Pid&name=@item.PName">
-                        <img style="width:120px;height:100px;"src="@Url.Content(item.Image)"/></a>
+                        <img style="width:250px;height:200px;"src="@Url.Content(item.Image)"/></a>
                         <br/><br/>
                         @Html.ActionLink(item.PName, "ProductDetails", new { pid=item.Pid})
                         <br/><br/>                    

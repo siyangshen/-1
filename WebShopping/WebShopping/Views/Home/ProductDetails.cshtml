@@ -38,19 +38,20 @@
 </div>
 @section scripts
 {
-    @Scripts.Render("~/bundles/jqueryval");
-    <script type="text/javascript">
-        function Check(img)
-        {
-            $("#imgs").attr("src", $(img).attr("src"));
-        }
-        function ShowResult(data)
-        {
-            if(data=="OK")
+        @Scripts.Render("~/bundles/jqueryval");
+        <script type="text/javascript">
+            function Check(img)
             {
-                alert("カートに入れました。")
+                $("#imgs").attr("src", $(img).attr("src"));
             }
-        }
-    </script>
+            function ShowResult(data)
+            {
+                if (data == "OK")
+                {
+                    alert("カートに入れました。")
+                }
+            }
+        </script>
+
 }
 
