@@ -13,7 +13,7 @@
     }
     #count{width:20px;}
     #ischeck{width:40px;}
-    #lable1{background-color:red;}
+    #lable1{background-color:cornsilk;}
 </style>
 @using (Html.BeginForm("Complete", "Order"))
 {
@@ -48,7 +48,7 @@
             <tr id="s">
                 <td id="ss">
                     <label id="allprice"style="text-align:right;padding-right:10px">0</label>
-                    <label>合計数：</label>
+                    <label>合計個数：</label>
                     <label id="allcount"style="text-align:right;padding-right:10px">0</label>
                 </td>
             </tr>
@@ -66,28 +66,28 @@
             var count = new Array();
             $("#products tr").each(function () {
                 if ($(this).find("#ischeck").val() != pid && $(this).find("#ischeck").val()) {
-                    if ($(this).find("ischeck").is(":checked")) {
+                    if ($(this).find("#ischeck").is(":checked")) {
                         checks.push("1");
                     }
+
+                    else {
+                        checks.push("0");
+                    }
+                    pids.push($(this).find("#ischeck").val());
+                    count.push($(this).find("#count").val());
                 }
-                else {
-                    checks.push("0");
-                }
-                pids.push($(this).find("#ischeck").val());
-                count.push($(this).find("#count").val());
             });
-        }
-        $.ajax(
-            {
-                type: "post",
-                url: "/Cart/Remove",
-                data: { pid: pid, pids: pids, checks: checks, count: count },
-                datatype: "Json",
-                success:function(data)
+            $.ajax(
                 {
-                    $("$show").html(data);
-                }
-            })
+                    type: "post",
+                    url: "/Cart/Remove",
+                    data: { pid: pid, pids: pids, checks: checks, count: count },
+                    datatype: "Json",
+                    success: function (data) {
+                        $("#show").html(data);
+                    }
+                })
+        }
         function ComputResult()
         {
             var pids = new Array();
@@ -164,6 +164,41 @@
                     });
                 }
             })
+        }
+        function urajax(pids,minus)
+        {
+            $.ajax(
+                {
+                    type: "post",
+                    url: "/Cart/Aajax",
+                    data: { pid: pids },
+                    datatype: "Json",
+                    success:function(data)
+                    {
+                        if($(minus).find("#ischeck").is(":checked"))
+                        {
+                            alert("-");
+                            var s = $("#allcount").text();
+                            var ss = parseFloat(s) - 1;
+                            $("#allcount").text(ss);
+                        }
+                        var price=$(minus).parent().parent().find("#lable1").text();
+                        var allnum=parseFloat(price)-parseFloat(data);
+                        $(minus).parent().parent().find("#lable1").text(allnum);
+                        $("#products tr").each(function()
+                        {
+                            if($(this).find("#ischeck").val())
+                            {
+                                if($(this).find("#ischeck").is(":checked"))
+                                {
+                                    var allprice=$("#allprice").text();
+                                    var sum=parseFloat(allprice.split(':')[1])-parseFloat(data);
+                                    $("#allprice").text("合計金額："+sum);
+                                }
+                            }
+                        });
+                    }
+                })
         }
         function AllAjax(pids,counts)
         {
