@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebShopping.Models;
+using System.Web.Security;
+     
 
 namespace WebShopping.Controllers
 {
@@ -60,6 +62,11 @@ namespace WebShopping.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+        //public ActionResult Login(string account, string pwd, string resultUrl)
+        //{
+        //    FormsAuthentication.SetAuthCookie("admin", false);
+        //    return Redirect(resultUrl);
+        //}
 
         //
         // POST: /Account/Login

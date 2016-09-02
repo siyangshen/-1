@@ -27,10 +27,12 @@
         @if(!Request.IsAuthenticated)
         {
             @Html.ActionLink("カートに入れる", "AddToCart", "Cart", new { pid=p.Pid,resulturl=Request.Url.ToString()},null)
+            @*@RenderSection("scripts");*@
         }
         else
         {
             @Ajax.ActionLink("カートに入れる", "AddToCart", "Cart", new { pid=p.Pid,resulturl=Request.Url.ToString()},new AjaxOptions { OnSuccess = "ShowResult" })
+            
         }
         &nbsp;&nbsp;
         @Html.ActionLink("今すぐ買う","Complete","Order")
@@ -48,7 +50,7 @@
             {
                 if (data == "OK")
                 {
-                    alert("カートに入れました。")
+                    alert("カートに入れました。");
                 }
             }
         </script>

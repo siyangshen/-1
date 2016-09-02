@@ -83,8 +83,9 @@ namespace WebShopping.Controllers
                 products.Add(produs.Where(d => d.Pid == item.Pid).SingleOrDefault());
                 num.Add(item.Amount);
             }
+            Session["carts"] = carts;
             ViewBag.counts = num;
-            return View("Index","Home");
+            return View(products);
         }
     }
 }

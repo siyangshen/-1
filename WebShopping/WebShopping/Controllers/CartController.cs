@@ -62,7 +62,7 @@ namespace WebShopping.Controllers
         {
             var cars = crats.Where(c => c.Mid == 1).ToList();
             List<Models.Product> ps = new List<Models.Product>();
-            foreach(var item in cars)
+            foreach (var item in cars)
             {
                 ps.Add(produs.Where(p => p.Pid == item.Pid).SingleOrDefault());
             }
@@ -73,6 +73,7 @@ namespace WebShopping.Controllers
         /// </summary>
         /// <param name="pid"></param>
         /// <returns></returns>
+        [Authorize]
         public ActionResult AddToCart(int pid)
         {
             Models.Cart car = new Models.Cart();
