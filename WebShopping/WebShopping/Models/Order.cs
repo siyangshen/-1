@@ -23,7 +23,7 @@ namespace WebShopping.Models
         public string BuyOn { get; set; }
         //ひとつのオーダーに複数の商品明細を含む可能
         public List<OrderDetail> OrderDetail { get; set; }
-        public int Mid { get; set; }
+        public string UserName{ get; set; }
         public Member Member { get; set; }
 
 

@@ -212,7 +212,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderContext.cs" />
     <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\OrderInitializer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductImg.cs" />
     <Compile Include="Models\ProductType.cs" />

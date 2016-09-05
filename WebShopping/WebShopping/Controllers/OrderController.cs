@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
+using System.Data.Entity;
+using System.Net;
+using WebShopping.Models;
 
 namespace WebShopping.Controllers
 {
     public class OrderController : Controller
     {
         // GET: Order
+        private OrderContext db = new OrderContext();
+        private CartContext dbForCart = new CartContext();
         List<Models.Product> produs = new List<Models.Product>()
         {
             new Models.Product
@@ -75,17 +81,29 @@ namespace WebShopping.Controllers
         //オーダーとカートの情報をデータベースへ書き込む
         public ActionResult Complete()
         {
-            List<Models.Cart> carts = (List<Models.Cart>)Session["carts"];
+            List<Models.Cart> carts = dbForCart.Carts.Where(c => c.UserName == User.Identity.Name).ToList();//(List<Models.Cart>)Session["carts"];
             List<Models.Product> products = new List<Models.Product>();
+            var order = new Order();
             List<int> num = new List<int>();
             foreach(var item in carts)
             {
-                products.Add(produs.Where(d => d.Pid == item.Pid).SingleOrDefault());
+                var orderDetail = new OrderDetail();
+                //products.Add(produs.Where(d => d.Pid == item.Pid).SingleOrDefault());
+                orderDetail.Product = produs.Where(d => d.Pid == item.Pid).SingleOrDefault();
+                orderDetail.Pid = orderDetail.Product.Pid;
+                orderDetail.Price = item.Product.Price;
+                // ...
                 num.Add(item.Amount);
+                ViewBag.counts = num;
+                order.OrderDetail.Add(orderDetail);
             }
-            Session["carts"] = carts;
-            ViewBag.counts = num;
-            return View(products);
+            //return View("Order");
+            //Session["carts"] = carts;
+            //ViewBag.counts = num;
+            db.Orders.Add(order);
+            db.SaveChanges();
+            return View(order);
+            //return View(db.Orders.Where(d => d.UserName == User.Identity.Name).ToList());
         }
     }
 }

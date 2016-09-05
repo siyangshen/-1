@@ -19,6 +19,7 @@ namespace WebShopping
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Database.SetInitializer<CartContext>(new CartInitializer());
+            Database.SetInitializer<OrderContext>(new OrderInitializer());
         }
     }
 }

@@ -34,11 +34,21 @@
             @Ajax.ActionLink("カートに入れる", "AddToCart", "Cart", new { pid=p.Pid,resulturl=Request.Url.ToString()},new AjaxOptions { OnSuccess = "ShowResult" })
             
         }
-        &nbsp;&nbsp;
-        @Html.ActionLink("今すぐ買う","Complete","Order")
+        @*&nbsp;&nbsp;
+        @Html.ActionLink("今すぐ買う","Complete","Order")*@
     </div>
 </div>
-@section scripts
+@*@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval");
+    <script>
+        function AddToCartSuccess()
+        {
+            alert("カートに入れました。");
+        }
+    </script>
+    }*@
+@*@section scripts
 {
         @Scripts.Render("~/bundles/jqueryval");
         <script type="text/javascript">
@@ -55,5 +65,5 @@
             }
         </script>
 
-}
+}*@
 

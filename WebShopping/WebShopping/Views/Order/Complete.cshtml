@@ -1,14 +1,16 @@
 ﻿
 @{
     ViewBag.Title = "Complete";
-    List<WebShopping.Models.Product> ps = Model;
+    //List<WebShopping.Models.Product> ps = Model;
+    WebShopping.Models.Order order = Model;
     List<int> counts = ViewBag.counts;
     int i = 0;
 }
 <h2>注文詳細</h2>
 <table id="products"style="border-color:ActiveCaption;">
-    @foreach(var item in ps)
+    @foreach(var detail in order.OrderDetail)
     {
+        var item = detail.Product;
         <tr style="border-color:ActiveCaption;border:2px solid">
             <td>
                 <img style="width:60px;height:60px;"src="@Url.Content(item.Image)"/>

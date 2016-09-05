@@ -12,12 +12,13 @@ namespace WebShopping.Models
         [Key]
         public int Cid { get; set; }
         [DisplayName("数量")]
-        [Required(ErrorMessage ="数量を入力してください。")]
+        [Required(ErrorMessage = "数量を入力してください。")]
         public int Amount { get; set; }
         public int Pid { get; set; }
         public Product Product { get; set; }
-        public int Mid { get; set; }
-        public Member Mem { get; set; }
+        public string UserName { get; set; }
+        //public int Mid { get; set; }
+        //public Member Mem { get; set; }
 
     }
 }
