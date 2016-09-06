@@ -14,7 +14,7 @@ namespace WebShopping.Controllers
     public class CartController : Controller
     {
         // GET: Cart
-        private CartContext db = new CartContext();
+        //private CartContext db = new CartContext();
         static List<Models.Cart> crats = new List<Models.Cart>();
         List<Models.Product> produs = new List<Models.Product>()
         {
@@ -67,15 +67,15 @@ namespace WebShopping.Controllers
         };
         public ActionResult Index()
         {
-            var cars = crats.Where(c => c.UserName == User.Identity.Name).ToList();
+            var cars = crats.Where(c => c.Mid == 1).ToList();
             List<Models.Product> ps = new List<Models.Product>();
             foreach (var item in cars)
             {
                 ps.Add(produs.Where(p => p.Pid == item.Pid).SingleOrDefault());
-                return View(ps);
+                //return View(ps);
             }
-            //return View(ps);
-            return View(db.Carts.Where(c => c.UserName == User.Identity.Name).ToList());
+            return View(ps);
+            //return View(db.Carts.Where(c => c.UserName == User.Identity.Name).ToList());
         }
         /// <summary>
         /// カートに入れる
@@ -89,9 +89,9 @@ namespace WebShopping.Controllers
             car.Cid = 1;
             car.Amount = 1;
             car.Pid = pid;
-            car.UserName = User.Identity.Name;
+            car.Mid = 1;
             //この商品はすでにカートに入っているかどうかをチェック
-            if (crats.Where(c => c.UserName == car.UserName && c.Pid == pid).Count() == 0)
+            if (crats.Where(c => c.Mid == car.Mid && c.Pid == pid).Count() == 0)
             {
                 crats.Add(car);
             }
@@ -99,20 +99,20 @@ namespace WebShopping.Controllers
             
 
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddToCart([Bind(Include = "Cid,Amount,Pid,UserName")]Cart cart)
-        {
-            if (ModelState.IsValid)
-            {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult AddToCart([Bind(Include = "Cid,Amount,Pid,Mid")]Cart cart)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
 
-                db.Carts.Add(cart);
-                cart.UserName = User.Identity.Name;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(cart);
-        }
+        //        db.Carts.Add(cart);
+        //        cart.UserName = User.Identity.Name;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(cart);
+        //}
         /// <summary>
         /// カートから削除
         /// </summary>
@@ -125,7 +125,7 @@ namespace WebShopping.Controllers
             string[] checks = Request.Form.GetValues("checks[]");
             string[] counts = Request.Form.GetValues("count[]");
             crats.Remove(crats.Where(s => s.Pid == pid).SingleOrDefault());
-            var cras = crats.Where(c => c.UserName == User.Identity.Name).ToList();
+            var cras = crats.Where(c => c.Mid == 1).ToList();
             List<Models.Product> ps = new List<Models.Product>();
             if(pids!=null)
             {
@@ -144,25 +144,25 @@ namespace WebShopping.Controllers
                         carss.Remove(item);
                         break;
                     }
-                    Cart cart = db.Carts.Find(pid);
+                    //Cart cart = db.Carts.Find(pid);
                 }
                 Session["carts"] = carss;
             }
             return PartialView("_PartialPage1", ps);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Remove([Bind(Include = "Cid,Amount,Pid,UserName")]Cart cart)
-        {
-            if(ModelState.IsValid)
-            {
-                db.Entry(cart).State = EntityState.Modified;
-                cart.UserName = User.Identity.Name;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(cart);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Remove([Bind(Include = "Cid,Amount,Pid,UserName")]Cart cart)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        db.Entry(cart).State = EntityState.Modified;
+        //        cart.UserName = User.Identity.Name;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(cart);
+        //}
         public ActionResult Ajaxplay()
         {
             string[] pids = Request.Form.GetValues("pid[]");
@@ -174,7 +174,7 @@ namespace WebShopping.Controllers
             {
                 return Content("0|0");
             }
-            Cart cart = db.Carts.Find(pids);
+            //Cart cart = db.Carts.Find(pids);
             for(int i=0;i<pids.Length;i++)
             {
                 price += produs.Where(d => d.Pid == int.Parse(pids[i])).SingleOrDefault().Price * double.Parse(counts[i]);
@@ -182,19 +182,19 @@ namespace WebShopping.Controllers
             }
             return Content(price.ToString() + "|" + sun.ToString());
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Ajaxplay([Bind(Include =" Cid, Amount, Pid, UserName")]Cart cart)
-        {
-            if(ModelState.IsValid)
-            {
-                db.Entry(cart).State = EntityState.Modified;
-                cart.UserName = User.Identity.Name;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(cart);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Ajaxplay([Bind(Include =" Cid, Amount, Pid, UserName")]Cart cart)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        db.Entry(cart).State = EntityState.Modified;
+        //        cart.UserName = User.Identity.Name;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(cart);
+        //}
         public ActionResult Aajax(string pid)
         {
             var resule = produs.Where(p => p.Pid == int.Parse(pid)).SingleOrDefault().Price;
@@ -214,7 +214,7 @@ namespace WebShopping.Controllers
                 Models.Cart c = new Models.Cart();
                 c.Pid = int.Parse(item);
                 c.Amount = int.Parse(counts[i]);
-                c.UserName = User.Identity.Name;
+                c.Mid = 1;
                 carts.Add(c);
                 i++;
             }
@@ -223,13 +223,13 @@ namespace WebShopping.Controllers
             return Content(sum.ToString());
             
         }
-        protected override void Dispose(bool disposing)
-        {
-            if(disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if(disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

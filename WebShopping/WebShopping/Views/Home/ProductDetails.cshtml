@@ -18,10 +18,11 @@
         在庫数量:     @p.PNum<br/><br/>
     </div>
     <div style="height:50px;margin:20px;clear:left;">
-        @foreach(var item in images)
+        @*@foreach(var item in images)
         {
             <img style="width:49px;margin:20px;height:49px;"src="@Url.Content(item.ImgUrl)"onmousemove="Check(this)"/>
-        }
+           
+        }*@
     </div>
     <div style="text-align:right;width:700px;">
         @if(!Request.IsAuthenticated)
@@ -34,8 +35,8 @@
             @Ajax.ActionLink("カートに入れる", "AddToCart", "Cart", new { pid=p.Pid,resulturl=Request.Url.ToString()},new AjaxOptions { OnSuccess = "ShowResult" })
             
         }
-        @*&nbsp;&nbsp;
-        @Html.ActionLink("今すぐ買う","Complete","Order")*@
+        &nbsp;&nbsp;
+        @Html.ActionLink("今すぐ買う","Complete","Order")
     </div>
 </div>
 @*@section scripts

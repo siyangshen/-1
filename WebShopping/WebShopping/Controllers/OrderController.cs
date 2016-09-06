@@ -73,36 +73,38 @@ namespace WebShopping.Controllers
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public ActionResult Complete(int s)
-        {
-            return View();
-        }
-        [HttpPost]
+        //public ActionResult Complete(int s)
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
         //オーダーとカートの情報をデータベースへ書き込む
+        [Authorize]
         public ActionResult Complete()
         {
-            List<Models.Cart> carts = dbForCart.Carts.Where(c => c.UserName == User.Identity.Name).ToList();//(List<Models.Cart>)Session["carts"];
-            List<Models.Product> products = new List<Models.Product>();
-            var order = new Order();
-            List<int> num = new List<int>();
-            foreach(var item in carts)
-            {
-                var orderDetail = new OrderDetail();
-                //products.Add(produs.Where(d => d.Pid == item.Pid).SingleOrDefault());
-                orderDetail.Product = produs.Where(d => d.Pid == item.Pid).SingleOrDefault();
-                orderDetail.Pid = orderDetail.Product.Pid;
-                orderDetail.Price = item.Product.Price;
-                // ...
-                num.Add(item.Amount);
-                ViewBag.counts = num;
-                order.OrderDetail.Add(orderDetail);
-            }
-            //return View("Order");
-            //Session["carts"] = carts;
-            //ViewBag.counts = num;
-            db.Orders.Add(order);
-            db.SaveChanges();
-            return View(order);
+            return View();
+            //List<Models.Cart> carts = dbForCart.Carts.Where(c => c.UserName == User.Identity.Name).ToList();//(List<Models.Cart>)Session["carts"];
+            //List<Models.Product> products = new List<Models.Product>();
+            //var order = new Order();
+            //List<int> num = new List<int>();
+            //foreach(var item in carts)
+            //{
+            //    var orderDetail = new OrderDetail();
+            //    //products.Add(produs.Where(d => d.Pid == item.Pid).SingleOrDefault());
+            //    orderDetail.Product = produs.Where(d => d.Pid == item.Pid).SingleOrDefault();
+            //    orderDetail.Pid = orderDetail.Product.Pid;
+            //    orderDetail.Price = item.Product.Price;
+            //    // ...
+            //    num.Add(item.Amount);
+            //    ViewBag.counts = num;
+            //    order.OrderDetail.Add(orderDetail);
+            //}
+            ////return View("Order");
+            ////Session["carts"] = carts;
+            ////ViewBag.counts = num;
+            //db.Orders.Add(order);
+            //db.SaveChanges();
+            //return View(order);
             //return View(db.Orders.Where(d => d.UserName == User.Identity.Name).ToList());
         }
     }

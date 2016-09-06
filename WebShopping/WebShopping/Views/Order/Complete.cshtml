@@ -1,12 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "Complete";
+    ViewBag.Title = "お会計";
     //List<WebShopping.Models.Product> ps = Model;
-    WebShopping.Models.Order order = Model;
-    List<int> counts = ViewBag.counts;
-    int i = 0;
+    //WebShopping.Models.Order order = Model;
+    //List<int> counts = ViewBag.counts;
+    //int i = 0;
 }
-<h2>注文詳細</h2>
+<h2>お会計が完了しました。</h2>
+<p>@ViewBag.Message</p>
+@*<h2>注文詳細</h2>
 <table id="products"style="border-color:ActiveCaption;">
     @foreach(var detail in order.OrderDetail)
     {
@@ -33,5 +35,5 @@
             <label id="allcount"style="text-align:right;padding-right:10px">0</label>
         </td>
     </tr>
-</table>
+</table>*@
 

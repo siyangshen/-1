@@ -40,9 +40,9 @@
                         @*<input type="button"id="add"onclick="Add(this)"value="+"/>*@
                         <input type="button"id="add"onclick="Add(this)"value="+"/>
                     </td>
-                    <td>
+                    @*<td>
                         <a href="#"onclick="Remove(@item.Pid)">削除</a>
-                    </td>
+                    </td>*@
                 </tr>
             }
             <tr id="s">
@@ -159,7 +159,7 @@
                             {
                                 var allprice=$("#allprice").text();
                                 var sum=parseFloat(allprice.split(':')[1])+parseFloat(data);
-                                $("#allprice").text("合計金額："+sum);
+                                $("#allprice").text(+sum);
                             }
                         }
                     });
@@ -194,7 +194,7 @@
                                 {
                                     var allprice=$("#allprice").text();
                                     var sum=parseFloat(allprice.split(':')[1])-parseFloat(data);
-                                    $("#allprice").text("合計金額："+sum);
+                                    $("#allprice").text(+sum);
                                 }
                             }
                         });
@@ -213,7 +213,7 @@
                 {
                     var allprice=$("#allprice").text();
                     var strs=data.split('|');
-                    var price="合計金額："+strs[0];
+                    var price=+strs[0];
                     var count=strs[1];
                     $("#allprice").text(price);
                     $("#allcount").text(count);
